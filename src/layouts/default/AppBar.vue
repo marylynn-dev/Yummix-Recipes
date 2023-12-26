@@ -8,14 +8,15 @@
 
       <v-col cols="5 ">
         <v-text-field
+          v-model="query"
           variant="outlined"
           density="compact"
           :rounded="false"
           label="Search"
-          style=""
+          @keyup.enter="searchTrigger"
         >
           <template v-slot:append-inner>
-            <v-icon>mdi-magnify</v-icon></template
+            <v-icon @click="searchTrigger">mdi-magnify</v-icon></template
           ></v-text-field
         ></v-col
       >
@@ -34,11 +35,21 @@
 </template>
 
 <script setup>
+import { ref } from "vue";
+
+const query = ref("");
 const items = [
   { title: "Log in", href: "#", disabled: false },
   { title: "Saved", href: "#", disabled: false },
   { title: "Contact Us", href: "#", disabled: false },
 ];
+
+const emit = defineEmits();
+
+function searchTrigger() {
+  emit("search", query.value);
+  console.log("emmited");
+}
 </script>
 
 <style scoped>
