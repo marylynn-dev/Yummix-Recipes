@@ -1,7 +1,7 @@
 <template>
+  <v-row class="mt-5 ml-5"> <h1>Search Results</h1> </v-row>
   <v-row>
-    <AppBar.vue @search="searchRecipes" />
-    <v-col v-for="hit in hits" :key="hit.recipe.uri">
+    <v-col v-for="hit in hits" :key="hit.id">
       <FoodItem :hit="hit"></FoodItem>
     </v-col>
   </v-row>
@@ -9,28 +9,36 @@
 
 <script setup>
 import FoodItem from "@/components/FoodItem.vue";
-import { ref, inject, watch } from "vue";
+import { ref, onMounted, getCurrentInstance } from "vue";
 import axios from "axios";
 
 const hits = ref([]);
-const searchTrigger = inject("searchTrigger");
+const emitter = getCurrentInstance().appContext.config.globalProperties.emitter;
+const apiKey = "97f76fb1a6b1437e82c01c5e7aa8b3a1";
 
 const searchRecipes = (query) => {
-  const apiKey = "/api/recipes/v2";
-  const apiUrl = "https://api.edamam.com/api/recipes/v2";
-
+  console.log("searching");
+  console.log(query);
   axios
-    .get(apiUrl, {
-      params: { q: query.value, app_id: "c50c7b73", app_key: apiKey },
+    .get(
+      `https://api.spoonacular.com/food/menuItems/search?query=${query}&number=10&apiKey=${apiKey}
+`,
+      {
+        headers: { "Content-Type": "application/json" }, // Fix: 'application/json' should be a string
+      }
+    )
+    .then((res) => {
+      hits.value = res.data.menuItems;
     })
-    .then((res) => console.log(res))
     .catch((err) => console.log(err));
 };
 
-watch(searchTrigger, (newValue) => {
-  console.log(searchTrigger);
-  if (newValue) {
-    newValue.$on("triggerSearch", doSearch);
-  }
+onMounted(() => {
+  emitter.on("search", (data) => {
+    console.log(data);
+    searchRecipes(data.query);
+
+    console.log("I am running");
+  });
 });
 </script>

@@ -1,12 +1,16 @@
 <template>
   <v-app-bar flat height="100">
-    <v-row
-      ><v-col class="text-center" cols="3"
-        ><span class="text-primary text-h4 t">Yummix</span>
-        <v-icon color="secondary" class="mb-4" icon="mdi-silverware-fork-knife"
-      /></v-col>
+    <v-row>
+      <v-col class="text-center" cols="3">
+        <span class="text-primary text-h4 t">Yummix</span>
+        <v-icon
+          color="secondary"
+          class="mb-4"
+          icon="mdi-silverware-fork-knife"
+        ></v-icon>
+      </v-col>
 
-      <v-col cols="5 ">
+      <v-col cols="5" class="mx-15">
         <v-text-field
           v-model="query"
           variant="outlined"
@@ -16,10 +20,11 @@
           @keyup.enter="searchTrigger"
         >
           <template v-slot:append-inner>
-            <v-icon @click="searchTrigger">mdi-magnify</v-icon></template
-          ></v-text-field
-        ></v-col
-      >
+            <v-icon @click="searchTrigger">mdi-magnify</v-icon>
+          </template>
+        </v-text-field>
+      </v-col>
+
       <v-col>
         <v-breadcrumbs :items="items" divider=" ">
           <template v-slot:prepend>
@@ -28,14 +33,16 @@
               icon="mdi-account-circle"
               color="primary"
             ></v-icon>
-          </template> </v-breadcrumbs></v-col
-      >.
+          </template>
+        </v-breadcrumbs>
+      </v-col>
     </v-row>
   </v-app-bar>
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, getCurrentInstance } from "vue";
+const emitter = getCurrentInstance().appContext.config.globalProperties.emitter;
 
 const query = ref("");
 const items = [
@@ -44,11 +51,9 @@ const items = [
   { title: "Contact Us", href: "#", disabled: false },
 ];
 
-const emit = defineEmits();
-
 function searchTrigger() {
-  emit("search", query.value);
-  console.log("emmited");
+  console.log("emitted");
+  emitter.emit("search", { query: query.value });
 }
 </script>
 
