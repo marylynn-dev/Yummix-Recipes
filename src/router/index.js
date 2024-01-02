@@ -14,6 +14,16 @@ const routes = [
         // which is lazy-loaded when the route is visited.
         component: () => import('@/views/Home.vue'),
       },
+      {
+        path: "/food-details/:hitId/:hitImg",
+        name: 'food-details',
+        component: () => import('../components/FoodDetails.vue'),
+        props: (route) => {
+          const id = route.params.hitId
+          const img = route.params.hitImg
+          return { id, img }
+        }
+      }
     ],
   },
 ]

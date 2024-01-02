@@ -21,14 +21,15 @@ const searchRecipes = (query) => {
   console.log(query);
   axios
     .get(
-      `https://api.spoonacular.com/food/menuItems/search?query=${query}&number=10&apiKey=${apiKey}
+      `https://api.spoonacular.com/recipes/complexSearch?query=${query}&number=10&apiKey=${apiKey}
 `,
       {
-        headers: { "Content-Type": "application/json" }, // Fix: 'application/json' should be a string
+        headers: { "Content-Type": "application/json" },
       }
     )
     .then((res) => {
-      hits.value = res.data.menuItems;
+      console.log(res.data.results);
+      hits.value = res.data.results;
     })
     .catch((err) => console.log(err));
 };

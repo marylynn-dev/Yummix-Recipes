@@ -1,5 +1,11 @@
 <template>
-  <v-card class="mx-auto my-12" max-width="350" max-height="400" flat>
+  <v-card
+    class="mx-auto my-4 px-2"
+    max-width="350"
+    max-height="400"
+    flat
+    :to="{ name: 'food-details', params: { hitId: hit.id, hitImg: hit.image } }"
+  >
     <v-img
       :src="hit.image"
       :width="300"
@@ -18,7 +24,7 @@
         text-overflow: ellipsis;
       "
     >
-      {{ hit._id.split("_").join(" ") }}
+      {{ hit.title }}
     </div>
     <v-card-text>
       <v-row align="center" class="mr-13 mt-2">

@@ -46,9 +46,9 @@ const emitter = getCurrentInstance().appContext.config.globalProperties.emitter;
 
 const query = ref("");
 const items = [
-  { title: "Log in", href: "#", disabled: false },
-  { title: "Saved", href: "#", disabled: false },
-  { title: "Contact Us", href: "#", disabled: false },
+  { title: "Log in", href: "#" },
+  { title: "Saved", href: "#" },
+  { title: "Contact Us", href: "#" },
 ];
 
 function searchTrigger() {
