@@ -1,4 +1,6 @@
 // Composables
+
+// Importing necessary functions from vue-router
 import { createRouter, createWebHistory } from 'vue-router'
 
 const routes = [
@@ -15,22 +17,26 @@ const routes = [
         component: () => import('@/views/Home.vue'),
       },
       {
-        path: "/food-details/:hitId/:hitImg",
+        path: "/food-details/:recipeId/:recipeImg/:recipeTitle",
         name: 'food-details',
         component: () => import('../components/FoodDetails.vue'),
+        // Passing route params as props to the component
         props: (route) => {
-          const id = route.params.hitId
-          const img = route.params.hitImg
-          return { id, img }
+          const id = route.params.recipeId
+          const img = route.params.recipeImg
+          const title = route.params.recipeTitle
+          return { id, img, title }
         }
       }
     ],
   },
 ]
 
+// Creating a router instance with web history mode
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes,
 })
 
+// Exporting the router instance
 export default router

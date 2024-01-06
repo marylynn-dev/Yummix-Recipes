@@ -1,20 +1,33 @@
 <template>
+  <!-- Recipe card with link to food details -->
   <v-card
     class="mx-auto my-4 px-2"
     max-width="350"
     max-height="400"
     flat
-    :to="{ name: 'food-details', params: { hitId: hit.id, hitImg: hit.image } }"
+    :to="{
+      name: 'food-details',
+      params: {
+        recipeId: recipe.id,
+        recipeImg: recipe.image,
+        recipeTitle: recipe.title,
+      },
+    }"
   >
+    <!-- Recipe image -->
     <v-img
-      :src="hit.image"
+      :src="recipe.image"
       :width="300"
       :height="250"
-      :alt="hit.title"
-      :lazy-src="hit.title"
+      :alt="recipe.title"
+      :lazy-src="recipe.title"
       cover
     ></v-img>
-    <div class="title my-3">{{ hit.title }}</div>
+
+    <!-- Recipe title -->
+    <div class="title my-3">{{ recipe.title }}</div>
+
+    <!-- Additional title details with ellipsis -->
     <div
       style="
         font-weight: 600;
@@ -24,10 +37,13 @@
         text-overflow: ellipsis;
       "
     >
-      {{ hit.title }}
+      {{ recipe.title }}
     </div>
+
+    <!-- Ratings and heart icon -->
     <v-card-text>
       <v-row align="center" class="mr-13 mt-2">
+        <!-- Display recipe rating -->
         <v-rating
           :model-value="4.5"
           color="primary"
@@ -37,7 +53,10 @@
           size="small"
         ></v-rating>
 
+        <!-- Display number of ratings -->
         <div class="text-grey ms-4">2,675 Ratings</div>
+
+        <!-- Heart icon for favoriting -->
         <div><v-icon color="primary">mdi-heart</v-icon></div>
       </v-row>
     </v-card-text>
@@ -45,13 +64,14 @@
 </template>
 
 <script setup>
-//props
+// Props setup
 defineProps({
-  hit: Object,
+  recipe: Object,
 });
 </script>
 
 <style scoped>
+/* Scoped styling for the title */
 .title {
   font-weight: 600;
   font-size: 12px;
