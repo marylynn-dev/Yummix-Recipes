@@ -1,45 +1,32 @@
 <template>
-  <v-row class="mt-5 ml-5"> <h1>Search Results</h1> </v-row>
-  <v-row>
-    <v-col v-for="hit in hits" :key="hit.id">
-      <FoodItem :hit="hit"></FoodItem>
-    </v-col>
-  </v-row>
+  <div>
+    <!-- Displaying the heading for search results -->
+    <v-row class="mt-5 ml-5"> <h1>Search Results</h1> </v-row>
+
+    <!-- Iterating over recipes and displaying each using FoodItem component -->
+    <v-row>
+      <v-col v-for="recipe in recipeStore.recipes" :key="recipe.id">
+        <FoodItem :recipe="recipe"></FoodItem>
+      </v-col>
+    </v-row>
+  </div>
 </template>
 
 <script setup>
 import FoodItem from "@/components/FoodItem.vue";
-import { ref, onMounted, getCurrentInstance } from "vue";
-import axios from "axios";
+import { onMounted, getCurrentInstance } from "vue";
+import { useRecipeStore } from "../store/recipe-store";
 
-const hits = ref([]);
+// Accessing the recipe store
+const recipeStore = useRecipeStore();
+
+// Accessing the global emitter to listen for search events from the appbar
 const emitter = getCurrentInstance().appContext.config.globalProperties.emitter;
-const apiKey = "97f76fb1a6b1437e82c01c5e7aa8b3a1";
 
-const searchRecipes = (query) => {
-  console.log("searching");
-  console.log(query);
-  axios
-    .get(
-      `https://api.spoonacular.com/recipes/complexSearch?query=${query}&number=10&apiKey=${apiKey}
-`,
-      {
-        headers: { "Content-Type": "application/json" },
-      }
-    )
-    .then((res) => {
-      console.log(res.data.results);
-      hits.value = res.data.results;
-    })
-    .catch((err) => console.log(err));
-};
-
+// Triggering search on component mount when a search event occurs
 onMounted(() => {
   emitter.on("search", (data) => {
-    console.log(data);
     searchRecipes(data.query);
-
-    console.log("I am running");
   });
 });
 </script>
