@@ -1,8 +1,25 @@
-// Composables
+/**
+ * router.js
+ *
+ * Router configuration with NProgress integration.
+ */
 
-// Importing necessary functions from vue-router
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHistory } from 'vue-router';
+import NProgress from 'nprogress';
+import 'nprogress/nprogress.css';
 
+// Configure NProgress settings
+NProgress.configure({
+  showSpinner: false,
+  easing: 'ease',
+  speed: 500,
+  minimum: 0.3,
+  bar: {
+    color: '#f15025', // Set the color of the NProgress bar to orange
+  },
+});
+
+// Define your routes
 const routes = [
   {
     path: '/',
@@ -11,32 +28,74 @@ const routes = [
       {
         path: '',
         name: 'Home',
-        // route level code-splitting
-        // this generates a separate chunk (Home-[hash].js) for this route
-        // which is lazy-loaded when the route is visited.
-        component: () => import('@/views/Home.vue'),
+        component: () => import('@/views/home.vue'),
+        // Add beforeEnter guard for the Home route
+        beforeEnter: (to, from, next) => {
+          setTimeout(() => {
+            next();
+          }, 10000);
+        },
       },
       {
         path: "/food-details/:recipeId/:recipeImg/:recipeTitle",
         name: 'food-details',
-        component: () => import('../components/FoodDetails.vue'),
-        // Passing route params as props to the component
+        component: () => import('../components/food-details'),
         props: (route) => {
-          const id = route.params.recipeId
-          const img = route.params.recipeImg
-          const title = route.params.recipeTitle
-          return { id, img, title }
-        }
-      }
+          const id = route.params.recipeId;
+          const img = route.params.recipeImg;
+          const title = route.params.recipeTitle;
+          return { id, img, title };
+        },
+        // Add beforeEnter guard for the Home route
+        beforeEnter: (to, from, next) => {
+          setTimeout(() => {
+            next();
+          }, 10000);
+        },
+      },
+      {
+        path: '/:pathMatch(.*)*',
+        name: 'not-found',
+        component: () => import('@/views/not-found.vue'),
+      },
     ],
   },
-]
+];
 
-// Creating a router instance with web history mode
+// Create the router instance
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes,
-})
+});
 
-// Exporting the router instance
-export default router
+// Counter to track ongoing requests
+let requestCounter = 0;
+
+// Function to start NProgress if it's not already started
+export const startNProgress = () => {
+  if (requestCounter === 0) {
+    NProgress.start();
+  }
+  requestCounter++;
+};
+
+// Function to decrement the counter and stop NProgress if no ongoing requests
+export const stopNProgress = () => {
+  requestCounter--;
+  if (requestCounter === 0) {
+    NProgress.done();
+  }
+};
+
+// Navigation guard to start NProgress
+router.beforeEach(() => {
+  startNProgress();
+});
+
+// Navigation guard to end NProgress
+router.afterEach(() => {
+  stopNProgress();
+});
+
+// Export the router instance
+export default router;

@@ -124,10 +124,49 @@
           </v-row>
 
           <!-- Display nutrition facts -->
+          <v-row class="mt-15">
+            <div>
+              <h1>
+                Nutrition Facts<span style="font-size: 20px"
+                  >(Per Serving)</span
+                >
+              </h1>
+            </div>
+          </v-row>
           <v-row v-if="recipeStore.nutrients">
-            {{ recipeStore.nutrients }}
+            <v-col>
+              <div style="font-weight: 900">
+                {{ recipeStore.nutrients.calories }}
+              </div>
+              <p>Calories</p>
+            </v-col>
+            <v-col>
+              <div style="font-weight: 900">
+                {{ recipeStore.nutrients.fat }}
+              </div>
+              <p>Fat</p>
+            </v-col>
+            <v-col>
+              <div style="font-weight: 900">
+                {{ recipeStore.nutrients.carbs }}
+              </div>
+              <p>Carbs</p>
+            </v-col>
+            <v-col>
+              <div style="font-weight: 900">
+                {{ recipeStore.nutrients.protein }}
+              </div>
+              <p>Protein</p>
+            </v-col>
           </v-row>
         </div>
+      </v-col>
+    </v-row>
+    <v-row class="my-15">
+      <div><h1>You'll also love</h1></div> </v-row
+    ><v-row>
+      <v-col v-for="recipe in recipeStore.similarRecipes" :key="recipe.id">
+        <foodItem :recipe="recipe"></foodItem>
       </v-col>
     </v-row>
   </v-container>
@@ -135,8 +174,8 @@
 
 <script setup>
 import { useRecipeStore } from "../store/recipe-store";
-import { convertToFraction } from "helpers/utils";
-
+import { convertToFraction } from "../services/utils";
+import foodItem from "./food-item.vue";
 const recipeStore = useRecipeStore();
 
 const props = defineProps(["id", "img", "title"]);
@@ -145,4 +184,5 @@ const props = defineProps(["id", "img", "title"]);
 recipeStore.getIngredients(props.id);
 recipeStore.getSteps(props.id);
 recipeStore.getNutrients(props.id);
+recipeStore.getSimilarRecipes(props.id);
 </script>

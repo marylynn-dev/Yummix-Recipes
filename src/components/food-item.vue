@@ -11,6 +11,7 @@
         recipeId: recipe.id,
         recipeImg: recipe.image,
         recipeTitle: recipe.title,
+      
       },
     }"
   >

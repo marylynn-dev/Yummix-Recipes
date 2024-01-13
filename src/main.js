@@ -7,6 +7,16 @@
 // Plugins
 import { registerPlugins } from '@/plugins'
 import mitt from "mitt"
+import NProgress from 'nprogress';
+import 'nprogress/nprogress.css';
+
+NProgress.configure({
+    showSpinner: false, // Disable the spinner
+    easing: 'ease', // Choose the easing function
+    speed: 500, // Set the animation speed
+    minimum: 0.3, // Adjust the minimum progress required to trigger the progress bar
+});
+
 
 // Components
 import App from './App.vue'
