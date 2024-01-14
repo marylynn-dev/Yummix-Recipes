@@ -5,7 +5,7 @@
       <v-row align="center" class="d-flex justify-content-between">
         <!-- Logo and app name -->
         <v-col cols="12" md="4">
-          <div class="text-center">
+          <div class="text-center" @click="handleClick">
             <span class="text-primary text-h4" style="font-weight: 800"
               >Yummix</span
             >
@@ -56,6 +56,9 @@
 <script setup>
 import { ref, getCurrentInstance } from "vue";
 const emitter = getCurrentInstance().appContext.config.globalProperties.emitter;
+import { useRouter } from "vue-router";
+
+const router = useRouter();
 
 // Reactive data
 const query = ref("");
@@ -64,6 +67,11 @@ const items = [
   { title: "Saved", href: "#" },
   { title: "Contact Us", href: "#" },
 ];
+
+//function to handle reroute to home
+const handleClick = () => {
+  window.location.reload();
+};
 
 // Function to trigger search to be emitted and listened to in the Home.vue
 function searchTrigger() {

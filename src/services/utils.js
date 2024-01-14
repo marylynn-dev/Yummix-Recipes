@@ -34,3 +34,8 @@ export const removeDuplicates = (array, key) => {
         (item, index, self) => self.findIndex((t) => t[key] === item[key]) === index
     );
 }
+
+//add isFav property to all recipes from db
+export const addIsFavProperty = (recipes) => {
+    return recipes.map(recipe => ({ ...recipe, isFav: false }));
+  };

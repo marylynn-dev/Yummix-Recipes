@@ -33,7 +33,7 @@ const routes = [
         beforeEnter: (to, from, next) => {
           setTimeout(() => {
             next();
-          }, 10000);
+          }, 1);
         },
       },
       {
@@ -50,7 +50,7 @@ const routes = [
         beforeEnter: (to, from, next) => {
           setTimeout(() => {
             next();
-          }, 10000);
+          }, 1);
         },
       },
       {
