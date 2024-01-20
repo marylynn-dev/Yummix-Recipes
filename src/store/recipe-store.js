@@ -10,6 +10,7 @@ import {
     getVegeterianRecipes,
     getBreakfastRecipes,
     getMainCourseRecipes,
+    allRecipes
 } from '../services/api';
 
 // define and export the recipe store using pinia
@@ -24,24 +25,32 @@ export const useRecipeStore = defineStore('recipeStore', {
         vegeterianRecipes: [],
         breakfastRecipes: [],
         mainCourseRecipes: [],
-        allRecipes: []
+        allRecipes: allRecipes
     }),
     //define getters for the store
     getters: {
-        allRecipesWithIsFav(state) {
-            // Combine recipes from different categories into one array
-            return [
-                ...state.recipes,
-                ...state.similarRecipes,
-                ...state.randomRecipes,
-                ...state.vegeterianRecipes,
-                ...state.breakfastRecipes,
-                ...state.mainCourseRecipes,
-            ];
-        },
+        // Getter to filter and return favorite tasks
+        favourites(state) {
+            return state.allRecipes.filter((recipe) => recipe.isFav === true);
+        }
     },
     // define actions for the store
     actions: {
+        //action to toggle isFav property
+        async toggleIsFav(id) {
+            console.log('becoming fav')
+            console.log(this.allRecipes)
+            const selectedRecipe = this.allRecipes.find((recipe) => {
+                recipe.id === id
+            })
+            console.log(`recipe is ${selectedRecipe}`)
+            selectedRecipe.isFav = !selectedRecipe.isFav
+            console.log(this.allRecipes)
+            console.log(selectedRecipe)
+            console.log(selectedRecipe.isFav)
+            console.log('done becoming fav')
+        },
+
         // action to get recipes
         async getRecipes(query) {
             try {
@@ -114,12 +123,6 @@ export const useRecipeStore = defineStore('recipeStore', {
                 console.error('Error getting mainCourse recipes ', error);
             }
         },
-        //action to toggle favourites
-        toggleIsFav(recipeId) {
-            const recipe = this.allRecipesWithIsFav.find(recipe => recipe.id === recipeId);
-            if (recipe) {
-                recipe.isFav = !recipe.isFav;
-            }
-        },
+
     }
 });

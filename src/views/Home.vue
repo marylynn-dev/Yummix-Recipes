@@ -112,6 +112,25 @@
           <v-col v-for="recipe in recipeStore.recipes" :key="recipe.id">
             <FoodItem :recipe="recipe"></FoodItem>
           </v-col>
+        </v-row>
+
+        <!-- Displaying the heading for search results -->
+        <v-row
+          v-if="
+            filter === true &&
+            recipeStore.favourites &&
+            recipeStore.favourites.length > 0
+          "
+          class="ml-2 my-3"
+          ><h1>Favourites</h1></v-row
+        >
+        <!-- Iterating over recipes and displaying each using FoodItem component -->
+        <v-row
+          v-if="recipeStore.favourites && recipeStore.favourites.length > 0"
+        >
+          <v-col v-for="recipe in recipeStore.favourites" :key="recipe.id">
+            <FoodItem :recipe="recipe"></FoodItem>
+          </v-col>
         </v-row></div></v-col
   ></v-row>
 </template>
@@ -124,6 +143,9 @@ import { useRecipeStore } from "../store/recipe-store";
 //To track when the user has searched for a recipe so as to switch from the random recipes to the search results
 const hasSearched = ref(false);
 
+//To track when user has selected favourites
+const filter = ref(true);
+
 // Accessing the recipe store
 const recipeStore = useRecipeStore();
 
@@ -132,14 +154,14 @@ const emitter = getCurrentInstance().appContext.config.globalProperties.emitter;
 
 // Triggering search on component mount when a search event occurs
 onMounted(() => {
-  //get random recipes
-  recipeStore.getRandomRecipes();
+  // //get random recipes
+  // recipeStore.getRandomRecipes();
 
-  //get vegeterian recipes
-  recipeStore.getVegeterianRecipes();
+  // //get vegeterian recipes
+  // recipeStore.getVegeterianRecipes();
 
-  //get breakfast recipes
-  recipeStore.getBreakfastRecipes();
+  // //get breakfast recipes
+  // recipeStore.getBreakfastRecipes();
 
   //get main course recipes
   recipeStore.getMainCourseRecipes();

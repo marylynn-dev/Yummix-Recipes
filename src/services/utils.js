@@ -37,5 +37,5 @@ export const removeDuplicates = (array, key) => {
 
 //add isFav property to all recipes from db
 export const addIsFavProperty = (recipes) => {
-    return recipes.map(recipe => ({ ...recipe, isFav: false }));
-  };
+    return recipes.map(recipe => ({ ...recipe, isFav: true }));
+};

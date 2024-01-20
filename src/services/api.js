@@ -9,6 +9,7 @@ import { removeDuplicates, addIsFavProperty } from "./utils";
 import { startNProgress, stopNProgress } from "../router/index"; // Corrected import names
 const apiKey = "97f76fb1a6b1437e82c01c5e7aa8b3a1";
 
+export let allRecipes = []
 // Get all recipes based on a specific query
 export const getRecipes = async (query) => {
     try {
@@ -19,6 +20,7 @@ export const getRecipes = async (query) => {
                 headers: { "Content-Type": "application/json" },
             }
         );
+        allRecipes.push(...res.data.results)
         return addIsFavProperty(res.data.results);
     } catch (error) {
         console.log(error);
@@ -90,6 +92,7 @@ export const getSimilarRecipes = async (recipeId) => {
                 params: { apiKey: apiKey },
                 headers: { 'Content-Type': 'application/json' },
             });
+        allRecipes.push(...res.data)
         return addIsFavProperty(res.data);
     } catch (error) {
         console.log(error);
@@ -107,6 +110,7 @@ export const getRandomRecipes = async () => {
                 params: { apiKey: apiKey },
                 headers: { 'Content-Type': 'application/json' },
             });
+        allRecipes.push(...res.data.recipes)
         return addIsFavProperty(res.data.recipes);
     } catch (error) {
         console.log(error);
@@ -124,6 +128,7 @@ export const getVegeterianRecipes = async () => {
                 params: { apiKey: apiKey },
                 headers: { 'Content-Type': 'application/json' },
             });
+        allRecipes.push(...res.data.recipes)
         return addIsFavProperty(res.data.recipes);
     } catch (error) {
         console.log(error);
@@ -141,6 +146,7 @@ export const getBreakfastRecipes = async () => {
                 params: { apiKey: apiKey },
                 headers: { 'Content-Type': 'application/json' },
             });
+        allRecipes.push(...res.data.recipes)
         return addIsFavProperty(res.data.recipes);
     } catch (error) {
         console.log(error);
@@ -160,6 +166,7 @@ export const getMainCourseRecipes = async () => {
             });
         const recipesWithIsFav = addIsFavProperty(res.data.recipes);
         console.log(recipesWithIsFav[0].isFav)
+        allRecipes.push(...res.data.recipesWithIsFav)
         return recipesWithIsFav;
         // return addIsFavProperty(res.data.recipes);
     } catch (error) {

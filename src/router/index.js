@@ -29,12 +29,7 @@ const routes = [
         path: '',
         name: 'Home',
         component: () => import('@/views/home.vue'),
-        // Add beforeEnter guard for the Home route
-        beforeEnter: (to, from, next) => {
-          setTimeout(() => {
-            next();
-          }, 1);
-        },
+
       },
       {
         path: "/food-details/:recipeId/:recipeImg/:recipeTitle",
@@ -46,12 +41,7 @@ const routes = [
           const title = route.params.recipeTitle;
           return { id, img, title };
         },
-        // Add beforeEnter guard for the Home route
-        beforeEnter: (to, from, next) => {
-          setTimeout(() => {
-            next();
-          }, 1);
-        },
+
       },
       {
         path: '/:pathMatch(.*)*',
