@@ -38,17 +38,24 @@ export const useRecipeStore = defineStore('recipeStore', {
     actions: {
         //action to toggle isFav property
         async toggleIsFav(id) {
-            console.log('becoming fav')
-            console.log(this.allRecipes)
-            const selectedRecipe = this.allRecipes.find((recipe) => {
-                recipe.id === id
-            })
-            console.log(`recipe is ${selectedRecipe}`)
-            selectedRecipe.isFav = !selectedRecipe.isFav
-            console.log(this.allRecipes)
-            console.log(selectedRecipe)
-            console.log(selectedRecipe.isFav)
-            console.log('done becoming fav')
+            console.log('becoming fav');
+            console.log(id)
+            const flattenedArray = this.allRecipes.flat()
+            console.log(flattenedArray)
+            let selectedRecipe;
+            for (let i = 0; i < this.allRecipes.length; i++) {
+                if (this.allRecipes[i].id === id) {
+                    selectedRecipe = this.allRecipes[i]
+                    console.log(selectedRecipe);
+                    break;
+                }
+            }
+
+            if (selectedRecipe) {
+                selectedRecipe.isFav = !selectedRecipe.isFav;
+            } else {
+                console.log('Recipe not found');
+            }
         },
 
         // action to get recipes

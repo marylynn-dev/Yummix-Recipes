@@ -52,7 +52,11 @@
                 <!-- Save button -->
                 <v-btn color="primary" append-icon="mdi-heart-outline">
                   <template v-slot:append>
-                    <v-icon color="primary"></v-icon>
+                    <v-icon
+                      @click="recipeStore.toggleIsFav(recipe.id)"
+                      :class="{ iconColor: recipe.isFav }"
+                      >mdi-heart</v-icon
+                    >
                   </template>
                   Save
                 </v-btn>
@@ -186,3 +190,9 @@ recipeStore.getSteps(props.id);
 recipeStore.getNutrients(props.id);
 recipeStore.getSimilarRecipes(props.id);
 </script>
+
+<style scoped>
+.iconColor {
+  color: rgb(255, 4, 4); /* Red color for emphasis */
+}
+</style>

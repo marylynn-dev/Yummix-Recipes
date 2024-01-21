@@ -57,7 +57,6 @@
         <!-- Heart icon for favoriting -->
         <div>
           <v-icon
-            color="primary"
             @click="recipeStore.toggleIsFav(recipe.id)"
             :class="{ iconColor: recipe.isFav }"
             >mdi-heart</v-icon

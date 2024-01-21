@@ -154,14 +154,14 @@ const emitter = getCurrentInstance().appContext.config.globalProperties.emitter;
 
 // Triggering search on component mount when a search event occurs
 onMounted(() => {
-  // //get random recipes
-  // recipeStore.getRandomRecipes();
+  //get random recipes
+  recipeStore.getRandomRecipes();
 
-  // //get vegeterian recipes
-  // recipeStore.getVegeterianRecipes();
+  //get vegeterian recipes
+  recipeStore.getVegeterianRecipes();
 
-  // //get breakfast recipes
-  // recipeStore.getBreakfastRecipes();
+  //get breakfast recipes
+  recipeStore.getBreakfastRecipes();
 
   //get main course recipes
   recipeStore.getMainCourseRecipes();

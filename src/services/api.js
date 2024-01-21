@@ -20,8 +20,9 @@ export const getRecipes = async (query) => {
                 headers: { "Content-Type": "application/json" },
             }
         );
-        allRecipes.push(...res.data.results)
-        return addIsFavProperty(res.data.results);
+        const recipesWithIsFav = addIsFavProperty(res.data.results)
+        allRecipes.push(...recipesWithIsFav)
+        return recipesWithIsFav;
     } catch (error) {
         console.log(error);
     } finally {
@@ -92,8 +93,9 @@ export const getSimilarRecipes = async (recipeId) => {
                 params: { apiKey: apiKey },
                 headers: { 'Content-Type': 'application/json' },
             });
-        allRecipes.push(...res.data)
-        return addIsFavProperty(res.data);
+        const recipesWithIsFav = addIsFavProperty(res.data)
+        allRecipes.push(...recipesWithIsFav)
+        return recipesWithIsFav;
     } catch (error) {
         console.log(error);
     } finally {
@@ -110,8 +112,9 @@ export const getRandomRecipes = async () => {
                 params: { apiKey: apiKey },
                 headers: { 'Content-Type': 'application/json' },
             });
-        allRecipes.push(...res.data.recipes)
-        return addIsFavProperty(res.data.recipes);
+        const recipesWithIsFav = addIsFavProperty(res.data.recipes)
+        allRecipes.push(recipesWithIsFav)
+        return recipesWithIsFav
     } catch (error) {
         console.log(error);
     } finally {
@@ -128,8 +131,9 @@ export const getVegeterianRecipes = async () => {
                 params: { apiKey: apiKey },
                 headers: { 'Content-Type': 'application/json' },
             });
-        allRecipes.push(...res.data.recipes)
-        return addIsFavProperty(res.data.recipes);
+        const recipesWithIsFav = addIsFavProperty(res.data.recipes)
+        allRecipes.push(recipesWithIsFav)
+        return recipesWithIsFav
     } catch (error) {
         console.log(error);
     } finally {
@@ -146,8 +150,9 @@ export const getBreakfastRecipes = async () => {
                 params: { apiKey: apiKey },
                 headers: { 'Content-Type': 'application/json' },
             });
-        allRecipes.push(...res.data.recipes)
-        return addIsFavProperty(res.data.recipes);
+        const recipesWithIsFav = addIsFavProperty(res.data.recipes)
+        allRecipes.push(...recipesWithIsFav)
+        return recipesWithIsFav
     } catch (error) {
         console.log(error);
     } finally {
@@ -165,10 +170,8 @@ export const getMainCourseRecipes = async () => {
                 headers: { 'Content-Type': 'application/json' },
             });
         const recipesWithIsFav = addIsFavProperty(res.data.recipes);
-        console.log(recipesWithIsFav[0].isFav)
-        allRecipes.push(...res.data.recipesWithIsFav)
+        allRecipes.push(...recipesWithIsFav)
         return recipesWithIsFav;
-        // return addIsFavProperty(res.data.recipes);
     } catch (error) {
         console.log(error);
     } finally {
