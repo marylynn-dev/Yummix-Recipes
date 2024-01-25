@@ -1,0 +1,41 @@
+GET http://localhost:3000/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoieW91cnMgdHJ1bHkiLCJpYXQiOjE2OTU1MTczNTAsImV4cCI6MTY5NTUyMDk1MCwiYXVkIjoiNjUwZjFiZjA5ZTcxOWIxZGY0NTQ0OThkIiwiaXNzIjoibWUuY29tIn0.l9O2KJ1Oio_jWX-QcMhl2BLg1t5aw5ejUxHttFR4_hk
+
+### login route
+POST http://localhost:3000/auth/log-in
+Content-Type: application/json
+
+{
+     "email": "userme109@gmail.com",
+     "password" : "1234"
+}
+
+
+### register route
+POST http://localhost:3000/auth/register
+Content-Type: application/json
+
+{
+     "email": "user123@gmail.com",
+     "password" : "1234"
+}
+
+### refresh token route
+POST http://localhost:3000/auth/refresh-token
+Content-Type: application/json
+
+{
+    "refreshToken":  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoieW91cnMgdHJ1bHkiLCJpYXQiOjE2OTU1MjA3MzEsImV4cCI6MTcyNzA3ODMzMSwiYXVkIjoiNjUwZjkxOTZlYmE3NDg2MDRkZTNjYmQyIiwiaXNzIjoibWUuY29tIn0.S0jNk8OQx0FMjeonGwKM6FdLcjg4G3JEGvwmrIx9K_I"
+}
+
+### log out route
+DELETE  http://localhost:3000/auth/log-out
+Content-Type: application/json
+
+{
+     "refreshToken" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoieW91cnMgdHJ1bHkiLCJpYXQiOjE2OTU1ODI0MTIsImV4cCI6MTcyNzE0MDAxMiwiYXVkIjoiNjUxMDg0YTljOTc2ODgyMDkyNDA0OGI3IiwiaXNzIjoibWUuY29tIn0.EFjSEHzTfV9uqmngaaJ4SDnzCAdtQhFI0s4qvuEpsb8"
+}
+
+
+
+
