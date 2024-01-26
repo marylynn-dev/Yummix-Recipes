@@ -1,7 +1,7 @@
 const JWT = require('jsonwebtoken')
 const createError = require('http-errors')
 const { createConnection } = require('mongoose')
-const client = require('../helpers/initRedis')
+const client = require('../helpers/init-redis')
 const { result } = require('@hapi/joi/lib/base')
 
 const signAccessTokenFunction = (userId) => {

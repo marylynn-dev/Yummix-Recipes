@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const { registerFunction, logInFunction, refreshTokenFunction, logOutFunction } = require('../controllers/auth.route.controller')
+const { registerFunction, logInFunction, refreshTokenFunction, logOutFunction } = require('../controllers/auth-route')
 
 router.post('/register', registerFunction)
 router.post('/log-in', logInFunction)

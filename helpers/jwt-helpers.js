@@ -1,4 +1,4 @@
-const { signAccessTokenFunction, verifyAccessTokenFunction, signRefreshTokenFunction, verifyRefreshTokenFunction } = require('../controllers/jwt.helpers.controller')
+const { signAccessTokenFunction, verifyAccessTokenFunction, signRefreshTokenFunction, verifyRefreshTokenFunction } = require('../controllers/jwt-helpers')
 
 module.exports = {
     signAccessToken: signAccessTokenFunction,

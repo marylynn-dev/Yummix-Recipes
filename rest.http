@@ -2,21 +2,21 @@ GET http://localhost:3000/
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoieW91cnMgdHJ1bHkiLCJpYXQiOjE2OTU1MTczNTAsImV4cCI6MTY5NTUyMDk1MCwiYXVkIjoiNjUwZjFiZjA5ZTcxOWIxZGY0NTQ0OThkIiwiaXNzIjoibWUuY29tIn0.l9O2KJ1Oio_jWX-QcMhl2BLg1t5aw5ejUxHttFR4_hk
 
 ### login route
-POST http://localhost:3000/auth/log-in
+POST http://localhost:3001/auth/log-in
 Content-Type: application/json
 
 {
-     "email": "userme109@gmail.com",
+     "email": "user123@gmail.com",
      "password" : "1234"
 }
 
 
 ### register route
-POST http://localhost:3000/auth/register
+POST http://localhost:3001/auth/register
 Content-Type: application/json
 
 {
-     "email": "user123@gmail.com",
+     "email": "user124@gmail.com",
      "password" : "1234"
 }
 
@@ -36,6 +36,23 @@ Content-Type: application/json
      "refreshToken" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoieW91cnMgdHJ1bHkiLCJpYXQiOjE2OTU1ODI0MTIsImV4cCI6MTcyNzE0MDAxMiwiYXVkIjoiNjUxMDg0YTljOTc2ODgyMDkyNDA0OGI3IiwiaXNzIjoibWUuY29tIn0.EFjSEHzTfV9uqmngaaJ4SDnzCAdtQhFI0s4qvuEpsb8"
 }
 
+### add favourite route
+PUT http://localhost:3001/fav/add-favourite
+Content-Type: application/json
+
+{
+     "userId" : "65b22ac8b3a28516cb6beefe",
+     "recipeId" : 55555
+}
+
+### remove favourite route
+DELETE  http://localhost:3001/fav/remove-fav
+Content-Type: application/json
+
+{
+     "userId" : "65b22ac8b3a28516cb6beefe",
+     "recipeId" : 55555
+}
 
 
 
