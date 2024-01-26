@@ -54,7 +54,6 @@
                   <template v-slot:append>
                     <v-icon
                       @click="recipeStore.toggleIsFav(recipe.id)"
-                      :class="{ iconColor: recipe.isFav }"
                       >mdi-heart</v-icon
                     >
                   </template>

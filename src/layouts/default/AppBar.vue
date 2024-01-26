@@ -1,10 +1,10 @@
 <template>
   <!-- Application bar with logo, search, and breadcrumbs -->
   <v-app-bar flat height="100">
-    <v-container style="padding: 0px; margin: 0px">
-      <v-row align="center" class="d-flex justify-content-between">
+    <div class="w-100">
+      <v-row align="center">
         <!-- Logo and app name -->
-        <v-col cols="12" md="4">
+        <v-col cols="2">
           <div class="text-center" @click="handleClick">
             <span class="text-primary text-h4" style="font-weight: 800"
               >Yummix</span
@@ -18,7 +18,7 @@
         </v-col>
 
         <!-- Search input field -->
-        <v-col cols="12" md="5">
+        <v-col align-self="center">
           <v-text-field
             v-model="query"
             variant="outlined"
@@ -27,6 +27,7 @@
             label="Search"
             @keyup.enter="searchTrigger"
             class="mt-3"
+            style="width: 500px; margin-left: 130px"
           >
             <!-- Search icon for triggering search -->
             <template v-slot:append-inner>
@@ -36,20 +37,53 @@
         </v-col>
 
         <!-- Breadcrumbs for navigation -->
-        <v-col cols="12" md="3" class="mb-3">
-          <v-breadcrumbs :items="items" divider=" ">
-            <!-- User account icon as a prepend to breadcrumbs -->
-            <template v-slot:prepend>
-              <v-icon
-                size="small"
-                icon="mdi-account-circle"
-                color="primary"
-              ></v-icon>
-            </template>
-          </v-breadcrumbs>
+        <v-col cols="4">
+          <div>
+            <v-row
+              ><v-col class="my-auto"
+                ><div class="d-flex">
+                  <div class="text-center">
+                    <v-menu open-on-hover>
+                      <template v-slot:activator="{ props }">
+                        <div class="d-flex">
+                          <v-icon color="primary">mdi-account-circle</v-icon>
+                          <v-btn color="primary" v-bind="props">
+                            Account
+                          </v-btn>
+                        </div>
+                      </template>
+
+                      <v-list>
+                        <v-list-item
+                          v-for="(item, index) in items"
+                          :key="index"
+                          :href="item.href"
+                        >
+                          <v-list-item-title>{{
+                            item.title
+                          }}</v-list-item-title>
+                        </v-list-item>
+                      </v-list>
+                    </v-menu>
+                  </div>
+                </div></v-col
+              >
+              <v-col class="my-auto"
+                ><div class="d-flex justify-content-around">
+                  <v-icon color="primary">mdi-heart</v-icon>
+                  <p>Favourites</p>
+                </div></v-col
+              >
+              <v-col class="my-auto"
+                ><div class="d-flex justify-content-around">
+                  <p>Contact Us</p>
+                </div></v-col
+              ></v-row
+            >
+          </div>
         </v-col>
       </v-row>
-    </v-container>
+    </div>
   </v-app-bar>
 </template>
 
@@ -61,12 +95,12 @@ import { useRouter } from "vue-router";
 const router = useRouter();
 
 // Reactive data
-const query = ref("");
-const items = [
-  { title: "Log in", href: "#" },
-  { title: "Saved", href: "#" },
-  { title: "Contact Us", href: "#" },
-];
+  const query = ref("");
+  const items = [
+    { title: "Login", href: "/login" },
+    { title: "Sign Up", href: "#" },
+    { title: "Log out", href: "#" },
+  ];
 
 //function to handle reroute to home
 const handleClick = () => {

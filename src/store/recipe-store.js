@@ -31,6 +31,7 @@ export const useRecipeStore = defineStore('recipeStore', {
     getters: {
         // Getter to filter and return favorite tasks
         favourites(state) {
+            console.log(state.allRecipes.filter((recipe) => recipe.isFav === true))
             return state.allRecipes.filter((recipe) => recipe.isFav === true);
         }
     },
@@ -38,10 +39,7 @@ export const useRecipeStore = defineStore('recipeStore', {
     actions: {
         //action to toggle isFav property
         async toggleIsFav(id) {
-            console.log('becoming fav');
-            console.log(id)
             const flattenedArray = this.allRecipes.flat()
-            console.log(flattenedArray)
             let selectedRecipe;
             for (let i = 0; i < this.allRecipes.length; i++) {
                 if (this.allRecipes[i].id === id) {

@@ -157,14 +157,14 @@ onMounted(() => {
   //get random recipes
   recipeStore.getRandomRecipes();
 
-  //get vegeterian recipes
-  recipeStore.getVegeterianRecipes();
+  // //get vegeterian recipes
+  // recipeStore.getVegeterianRecipes();
 
-  //get breakfast recipes
-  recipeStore.getBreakfastRecipes();
+  // //get breakfast recipes
+  // recipeStore.getBreakfastRecipes();
 
-  //get main course recipes
-  recipeStore.getMainCourseRecipes();
+  // //get main course recipes
+  // recipeStore.getMainCourseRecipes();
 
   //listen for the search emit
   emitter.on("search", (data) => {

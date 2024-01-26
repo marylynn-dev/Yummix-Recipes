@@ -22,12 +22,17 @@ NProgress.configure({
 // Define your routes
 const routes = [
   {
-    path: '/',
+    path: '/login',
+    name: 'login',
+    component: () => import('@/views/login.vue'),
+  },
+  {
+    path: '/home',
     component: () => import('@/layouts/default/Default.vue'),
     children: [
       {
         path: '',
-        name: 'Home',
+        name: 'home',
         component: () => import('@/views/home.vue'),
 
       },

@@ -113,7 +113,7 @@ export const getRandomRecipes = async () => {
                 headers: { 'Content-Type': 'application/json' },
             });
         const recipesWithIsFav = addIsFavProperty(res.data.recipes)
-        allRecipes.push(recipesWithIsFav)
+        allRecipes.push(...recipesWithIsFav)
         return recipesWithIsFav
     } catch (error) {
         console.log(error);
@@ -132,7 +132,7 @@ export const getVegeterianRecipes = async () => {
                 headers: { 'Content-Type': 'application/json' },
             });
         const recipesWithIsFav = addIsFavProperty(res.data.recipes)
-        allRecipes.push(recipesWithIsFav)
+        allRecipes.push(...recipesWithIsFav)
         return recipesWithIsFav
     } catch (error) {
         console.log(error);
